@@ -6,15 +6,29 @@ class Cache:
         self.files = {}     # key is name of
         self.lru = {}
 
-    def put(self,key,data):
-        pass
+        def put(self,key,data):
+            if key not in self.files and len(self.files)== self.capacity:
+                oldest = min(self.lru.keys(), key=lambda k:self.lru[k])
+                self.files.pop(oldest)
+                self.lru.pop(oldest)
+                self.files[key] = data
+
+            else:
+                if key not in self.files:
+                    self.files[key] = data
+                    self.lru[key] = 1
+            return "put success"
 
 
-    def get(self,key):
-        pass
+        def get(self,key):
+            if key in self.files:
+                self.lru[key]+=1
+                return self.files[key]
+            else:
+                print ("Not there in cache")
 
-    def get_cache(self):
-        pass
+        def get_cache(self):
+            return self.files
 
 obj = Cache(5)
 
