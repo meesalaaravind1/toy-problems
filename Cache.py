@@ -1,34 +1,29 @@
 class Cache:
     def __init__(self,capacity):
-        '''capacity is size,files is the file dictionary and frequency is the count of file opened.'''
+
         super().__init__()
         self.capacity = capacity
-        self.files = {}     # key is name of
+        self.files = {}
         self.lru = {}
 
-        def put(self,key,data):
-            if key not in self.files and len(self.files)== self.capacity:
-                oldest = min(self.lru.keys(), key=lambda k:self.lru[k])
-                self.files.pop(oldest)
-                self.lru.pop(oldest)
-                self.files[key] = data
+    def put(self,key,data):
+        if key not in self.files and len(self.files)== self.capacity:
+            oldest = min(self.lru.keys(), key=lambda k:self.lru[k])
+            self.files.pop(oldest)
+            self.lru.pop(oldest)
+        self.files[key] = data
+        self.lru[key] = 1
+        return "put success"
 
-            else:
-                if key not in self.files:
-                    self.files[key] = data
-                    self.lru[key] = 1
-            return "put success"
+    def get(self,key):
+        if key in self.files:
+            self.lru[key]+=1
+            return self.files[key]
+        else:
+            print ("Not there in cache")
 
-
-        def get(self,key):
-            if key in self.files:
-                self.lru[key]+=1
-                return self.files[key]
-            else:
-                print ("Not there in cache")
-
-        def get_cache(self):
-            return self.files
+    def get_cache(self):
+        return self.files
 
 obj = Cache(5)
 
