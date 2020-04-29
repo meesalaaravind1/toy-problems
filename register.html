@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<style>
+  #titles{
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-family: sans-serif;
+    background-color: black;
+    padding: 10px;
+    border-radius: 50px;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 5%;
+}
+header{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+html{
+    background-color: grey;
+}
+.btn-secondary{
+    margin-left: 5%;
+}
+.input-group{
+    margin-left:5%;
+}
+.form-control{
+    margin-right: 60%;
+}
+.input-group-text{
+    font-family: sans-serif;
+    color: black;
+}
+#pwdp,#emailp{
+    color:red;
+}
+@media(max-width: 1000px){
+
+    .form-control{
+        margin-right: 20%;
+        margin-left : 5%
+    }
+}
+</style>
+<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <title>Register</title>
+
+<html>
+
+    <header>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <head>
+            <title>Register</title>
+        </head>
+        <body>
+          <h1 id=titles><u>Registration Page</u></h1>
+            <div class="container" >
+                <div class="row" style="margin-top: 40px">
+                    <div class="col-sm-6">
+                        <form id="new-form" action="">
+                            <div class="form-group">
+                                <label   for="name">Email : </label>
+                                <input id="mail" class="form-control" >
+                                <p id="emailp"></p><br>
+                            </div>
+
+                            <div class="form-group">
+                                <label   for="name">Password : </label>
+                                <input type="password" id="pwd" class="form-control" >
+                                <p id="pwdp"></p>
+                            </div>
+
+                            <button type="submit" id="submit" class="btn btn-secondary btn-lg">register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </body>
+        <script>
+            document.addEventListener("DOMContentLoaded",function(){
+                document.querySelector('#new-form').onsubmit = function(){
+                    if(document.querySelector('#mail').value.length === 0){
+                        document.querySelector('#emailp').innerHTML="Cannot leave this field empty"
+                        return false
+                    }
+                    else{
+                        document.querySelector('#emailp').innerHTML=""
+                        email = document.querySelector("#mail").value
+                        const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+                        var validate = expression.test(String(email).toLowerCase())
+                        if (validate === false){
+                            document.querySelector('#emailp').innerHTML="should be in the form of xx@yy.zz"
+                            return false
+                        }
+                        else{
+                            document.querySelector('#emailp').innerHTML=""
+                            if(document.querySelector('#pwd').value.length === 0){
+                                console.log("Ammababoi")
+                                document.querySelector('#pwdp').innerHTML="Cannot leave this field empty"
+                                return false
+                            }
+                            else{
+                                document.querySelector('#pwdp').innerHTML=""
+                                password = document.querySelector("#pwd").value
+                                var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+                                val  = strongRegex.test(String(password))
+                                if (val === false){
+                                    document.querySelector('#pwdp').innerHTML="The passwrd should have atleast 1 uppercase,1 lowercase,1 digit and 1 spl char and length of password should be more than 6 "
+                                    return false
+                                }
+                                else{
+                                    document.querySelector('#pwdp').innerHTML=""
+                                    return true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </header>
+</html>
