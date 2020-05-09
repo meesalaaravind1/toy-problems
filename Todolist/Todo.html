@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Todo</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <script type="text/babel">
+            class Todo extends React.Component{
+                constructor(props){
+                    super(props);
+                    this.state = {
+                        tasks:["task1","task2","task3"],
+                        input:""
+                    }
+                }
+                render(){
+                    return(
+                        <div>
+
+                            <h1>Tasks</h1>
+                            <ul>
+                                {this.state.tasks.map((task,i) =>
+                                    <li key={i}>
+                                        <button onClick={this.deleteTask} >Done</button>
+                                        {task}
+                                    </li>
+                                )}
+                            </ul>
+                            <div><input onChange={this.handleChange} value={this.state.input}/>
+                                <button onClick={this.addTask}> Add Task </button>
+                                <h4>Number of tasks : {this.state.tasks.length} </h4>
+                            </div>
+                        </div>
+                    );
+                }
+
+                handleChange = (Event) => {
+                    this.setState({
+                        input:event.target.value
+                    });
+                }
+
+                addTask = () =>{
+                    this.setState(state => ({
+                        tasks:[...state.tasks,state.input],
+                        input:""
+                    }))
+                }
+
+                deleteTask = (event) =>{
+                    const index= event.target.dataset.index;
+                    this.setState(state =>{
+                        const newtasks = [...state.tasks];
+                        newtasks.splice(index,1);
+                        //tasks : newtasks
+                        return(state.tasks = newtasks);
+                    });
+                }
+            }
+
+            class App extends React.Component{
+                render(){
+                    return(
+                        <div>
+                            <Todo />
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<App />,document.querySelector("#app"));
+        </script>
+    </head>
+    <body>
+        <div id="app"></div>
+    </body>
+</html>
