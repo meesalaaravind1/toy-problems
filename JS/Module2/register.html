@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        html{
+            margin:10%
+        }
+        h1{
+            text-align: center;
+            padding: 2%;
+        }
+        .flex-nowrap,button{
+
+            padding : 2%;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            document.querySelector('#new-task').onsubmit = () =>
+{
+var mailformat = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
+if(inputText.value.match(mailformat))
+{
+document.form1.text1.focus();
+return true;
+}
+else
+{
+alert("Invalid Email");
+document.form1.text1.focus();
+return false;
+}
+}
+        })
+    </script>
+<head>
+    <title>Register Page</title>
+    <h1><u>Register Page</u></h1>
+</head>
+<body>
+    <form action="#" name="form1">
+        <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping">email</span>
+            </div>
+            <input type="text" name="email" class="form-control" placeholder="Email ID" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+
+          <div class="input-group flex-nowrap">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="addon-wrapping">Password</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="addon-wrapping">
+          </div>
+          <button type="submit" class="btn btn-dark" value="Submit" >Submit</button>
+    </form>
+</body>
+</html>
